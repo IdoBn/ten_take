@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :item do
-    status "MyString"
+    status "free"
     user_id 1
   end
 end
