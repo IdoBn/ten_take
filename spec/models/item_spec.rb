@@ -6,7 +6,9 @@ RSpec.describe Item, :type => :model do
   context "validations" do
   	it { should allow_value('taken', 'free')
   							.for(:status) }
-  	it { should_not allow_value('jfowiejfo', 'kishkush', 'jfoeijfoe').for(:status) }
+  	it { should_not allow_value('jfowiejfo', 'kishkush', 'jfoeijfoe')
+  							.for(:status) }
+  	it { should validate_presence_of(:status) }
   end
 
   context "associations" do
