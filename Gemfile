@@ -5,6 +5,7 @@ gem 'rails', '4.2.0.beta1'
 
 gem 'rails-api'
 gem 'devise_token_auth'
+gem 'omniauth', '>= 1.0.0'
 
 gem 'spring', :group => :development
 
