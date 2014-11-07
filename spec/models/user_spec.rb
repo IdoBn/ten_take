@@ -5,7 +5,7 @@ RSpec.describe User, :type => :model do
 
   context "associations" do
   	it { should have_many(:items) }
-  	# it { should have_many(:borrows) }
+  	it { should have_many(:borrows) }
   	# it { should have_many(:check_outs) }
   end
 end
