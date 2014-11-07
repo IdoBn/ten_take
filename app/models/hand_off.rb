@@ -1,4 +1,5 @@
 class HandOff < ActiveRecord::Base
+	after_update :update_status
 	belongs_to :borrow
 
 	def borrower
@@ -7,5 +8,16 @@ class HandOff < ActiveRecord::Base
 
 	def lender
 		self.borrow.lender
+	end
+
+	def update_status
+		if(self.status_changed?)
+			if(self.status == 2)
+				self.borrow.update_attribute(:status, "taken")
+			end
+			if(self.status == 3)
+				self.borrow.update_attribute(:status, "done")
+			end
+		end
 	end
 end
