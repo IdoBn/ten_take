@@ -9,6 +9,10 @@ class Borrow < ActiveRecord::Base
 		self.item.user
 	end
 
+	def hand_off!
+		self.hand_offs.create
+	end
+
 	def update_status
 		if(self.status_changed?)
 			if(self.status == "taken")

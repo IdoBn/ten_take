@@ -16,16 +16,16 @@ RSpec.describe "Integration_model",  :type => :model do
 	it "user_b's gets" do
 		item = user_a.items.create
 		expect(item.status).to eq("free")
-		borrow = user_b.borrows.create(item_id: item.id)
+		borrow = user_b.borrow!(item)
 		expect(item.borrows).to include(borrow)
-		hanop = borrow.hand_offs.create
-		expect(hanop.status).to eq(1)
-		hanop.update_attribute(:status,2)
+		hand_off = borrow.hand_off!
+		expect(hand_off.status).to eq(1)
+		hand_off.next_step
 		expect(borrow.status).to eq("taken")
 		expect(item.reload.status).to eq("taken")
-		hanop.update_attribute(:status ,3)
-		expect(hanop.status).to eq(3)
-		hanop.update_attribute(:status , 4)
+		hand_off.next_step
+		expect(hand_off.status).to eq(3)
+		hand_off.next_step
 		expect(borrow.status).to eq("done")
 		expect(item.reload.status).to eq("free")
 	end

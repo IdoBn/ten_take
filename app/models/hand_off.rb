@@ -10,6 +10,12 @@ class HandOff < ActiveRecord::Base
 		self.borrow.lender
 	end
 
+	def next_step
+		unless status >= 4
+			self.update_attribute(:status, self.status + 1)
+		end
+	end
+
 	def update_status
 		if(self.status_changed?)
 			if(self.status == 2)
