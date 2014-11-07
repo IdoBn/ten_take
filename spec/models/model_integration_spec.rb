@@ -14,20 +14,20 @@ RSpec.describe "Integration_model",  :type => :model do
 	it { expect(hand_off.lender).to eq(user_a) }
 
 	it "user_b's gets" do
-		item = user_a.items.create(status: "free")
+		item = user_a.items.create
 		expect(item.status).to eq("free")
-		borrow = user_b.borrows.create(status: "want",item_id: item.id)
+		borrow = user_b.borrows.create(item_id: item.id)
 		expect(item.borrows).to include(borrow)
-		hanop = borrow.hand_offs.create(status: 1)
+		hanop = borrow.hand_offs.create
 		expect(hanop.status).to eq(1)
 		hanop.update_attribute(:status,2)
 		expect(borrow.status).to eq("taken")
 		expect(item.reload.status).to eq("taken")
-		handop.update_attribute(:status ,3)
-		expect(handop.status).to eq(3)
+		hanop.update_attribute(:status ,3)
+		expect(hanop.status).to eq(3)
 		hanop.update_attribute(:status , 4)
 		expect(borrow.status).to eq("done")
-		expect(item.status).to eq("free")
+		expect(item.reload.status).to eq("free")
 	end
 
 end
