@@ -5,6 +5,8 @@ class Borrow < ActiveRecord::Base
 	belongs_to :item
 	has_many :hand_offs
 
+	validates :item_id, presence: true
+
 	def lender
 		self.item.user
 	end
