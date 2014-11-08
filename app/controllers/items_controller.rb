@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-  	@item = Item.new(params[:item])
+  	@item = current_user.items.new(item_params)
   	if @item.save!
   		render json: {item: @item}
   	else
@@ -30,6 +30,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-  	params.require(:item).permit(:status)
+  	params.require(:item).permit(:title, :description)
   end
 end
