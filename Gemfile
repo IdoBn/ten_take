@@ -7,6 +7,7 @@ gem 'rails-api'
 gem 'active_model_serializers', '~> 0.9.0'
 
 gem 'carrierwave'
+gem "fog"
 
 gem 'devise_token_auth'
 gem 'omniauth', '>= 1.0.0'
