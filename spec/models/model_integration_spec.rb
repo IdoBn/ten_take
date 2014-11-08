@@ -16,7 +16,7 @@ RSpec.describe "Integration_model",  :type => :model do
 	it "user_b's gets" do
 		item = user_a.items.create
 		expect(item.status).to eq("free")
-		borrow = user_b.borrow!(item)
+		borrow = user_b.borrow!(item.id)
 		expect(item.borrows).to include(borrow)
 		hand_off = borrow.hand_off!
 		expect(hand_off.status).to eq(1)
