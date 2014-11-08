@@ -12,8 +12,8 @@ class ItemsController < ApplicationController
   end
 
   def update
-  	@item = Item.find(params[:id])
-  	if @item.update_attributes(params[:item])
+  	@item = current_user.items.find(params[:id])
+  	if @item.update_attributes(item_params)
   		render json: {item: @item}
   	else
   		render json: {errors: @item.errors.full_messages}
