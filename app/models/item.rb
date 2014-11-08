@@ -5,4 +5,6 @@ class Item < ActiveRecord::Base
 
 	belongs_to :user
 	has_many :borrows
+
+	mount_uploader :image, ImageUploader
 end
