@@ -21,11 +21,13 @@ RSpec.describe "Integration_model",  :type => :model do
 		hand_off = borrow.hand_off!
 		expect(hand_off.status).to eq(1)
 		hand_off.next_step
+		expect(hand_off.status).to eq(2)
 		expect(borrow.status).to eq("taken")
 		expect(item.reload.status).to eq("taken")
 		hand_off.next_step
 		expect(hand_off.status).to eq(3)
 		hand_off.next_step
+		expect(hand_off.status).to eq(4)
 		expect(borrow.status).to eq("done")
 		expect(item.reload.status).to eq("free")
 	end
