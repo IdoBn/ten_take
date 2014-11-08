@@ -1,5 +1,6 @@
 class BorrowsController < ApplicationController
 	before_action :authenticate_user!
+  before_action :set_borrow, only: [:show]
 	
   def index
   	@borrows = current_user.borrows
@@ -7,7 +8,7 @@ class BorrowsController < ApplicationController
   end
 
   def show
-  	render json: {borrow: borrow}
+  	render json: {borrow: @borrow}
   end
 
   # def update
@@ -28,7 +29,7 @@ class BorrowsController < ApplicationController
   end
 
  private
- 	def borrow
+ 	def set_borrow
  		@borrow ||= Borrow.find(params[:id])
  	end
 
