@@ -8,7 +8,9 @@ RSpec.describe HandOff, :type => :model do
   end
 
   it "should not allow more than 4 steps" do
-  	hand_off = FactoryGirl.create(:hand_off)
+    item = FactoryGirl.create(:item)
+    borrow = FactoryGirl.create(:borrow, item_id: item.id)
+  	hand_off = FactoryGirl.create(:hand_off, borrow_id: borrow.id)
   	expect(hand_off.status).to be(1)
   	hand_off.next_step
   	expect(hand_off.status).to be(2)
