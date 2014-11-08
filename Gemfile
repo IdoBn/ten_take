@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0.beta1'
 
 gem 'rails-api'
+gem 'active_model_serializers', '~> 0.9.0'
+
 gem 'devise_token_auth'
 gem 'omniauth', '>= 1.0.0'
 

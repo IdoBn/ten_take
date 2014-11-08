@@ -2,6 +2,10 @@ class HandOff < ActiveRecord::Base
 	after_update :update_status
 	belongs_to :borrow
 
+	def item
+		self.borrow.item
+	end
+
 	def borrower
 		self.borrow.borrower
 	end
