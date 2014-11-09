@@ -14,6 +14,7 @@ gem 'devise_token_auth'
 gem 'omniauth', '>= 1.0.0'
 
 gem 'spring', :group => :development
+gem "letter_opener", :group => :development
 
 group :development, :test do
 	gem 'rspec-rails', '~> 3.1.0'
