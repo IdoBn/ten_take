@@ -5,6 +5,7 @@ gem 'rails', '4.2.0.beta1'
 
 gem 'rails-api'
 gem 'active_model_serializers', '~> 0.9.0'
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'carrierwave'
 gem "fog"
