@@ -1,5 +1,5 @@
 class EmbedItemSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :image, :created_at, :updated_at, :status
+  attributes :id, :name, :description, :image, :created_at, :updated_at, :status, :value
   root false
 
   def image

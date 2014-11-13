@@ -1,5 +1,5 @@
 class UserWithItemSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :image, :uid, :provider, :created_at, :updated_at, :items
+  attributes :id, :name, :email, :image, :uid, :provider, :created_at, :updated_at, :items, :points
 
   root 'user'
 
