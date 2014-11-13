@@ -4,6 +4,6 @@ class UserWithItemSerializer < ActiveModel::Serializer
   root 'user'
 
   def items
-  	object.items.map { |i| EmbedItemSerializer.new(i) }.to_json
+  	object.items.map { |i| EmbedItemSerializer.new(i) }.as_json
   end
 end

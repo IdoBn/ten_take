@@ -3,18 +3,18 @@ class ItemsController < ApplicationController
 
   def index
   	@items = Item.all
-  	render json: @item, each_serializer: ItemSerializer
+  	render json: { items: @item.map { |i| ItemSerializer.new(i) }.as_json(root: false) }
   end
 
   def show
   	@item = Item.find(params[:id])
-  	render json: @item, each_serializer: ItemSerializer
+  	render json: ItemSerializer.new(@item)
   end
 
   def update
   	@item = current_user.items.find(params[:id])
   	if @item.update_attributes(item_params)
-  		render json: ItemSerializer.new(@item).to_json
+  		render json: ItemSerializer.new(@item).as_json
   	else
   		render json: {errors: @item.errors.full_messages}
   	end
@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   def create
   	@item = current_user.items.new(item_params)
   	if @item.save!
-  		render json: ItemSerializer.new(@item).to_json
+  		render json: ItemSerializer.new(@item).as_json
   	else
   		render json: {errors: @item.errors.full_messages}
   	end
