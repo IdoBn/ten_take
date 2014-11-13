@@ -1,7 +1,6 @@
-class ItemSerializer < ActiveModel::Serializer
+class EmbedItemSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :image, :created_at, :updated_at, :status
-
-  has_one :user
+  root false
 
   def image
   	object.image.url
