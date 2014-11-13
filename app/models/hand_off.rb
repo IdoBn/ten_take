@@ -17,8 +17,20 @@ class HandOff < ActiveRecord::Base
 	def next_step commiter_id
 		unless status >= 4
 			if (status % 2 == 0) && (self.borrower.id == commiter_id)
-				self.update_attribute(:status, self.status + 1)	
+				self.update_attribute(:status, self.status + 1)
 			elsif (status % 2 == 1) && (self.lender.id == commiter_id)
+				if (status == 1)
+					if (self.borrower.points >= self.item.value)
+						self.update_attribute(:status, self.status + 1)
+						#money trans
+						self.borrower.update_attribute(:points, (self.borrower.points - self.item.value))
+						self.lender.update_attribute(:points, (self.lender.points + self.item.value))
+						return
+					else
+						#not enough money
+						return
+					end
+				end	
 				self.update_attribute(:status, self.status + 1)
 			end
 		end
