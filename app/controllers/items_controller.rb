@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   def index
   	@items = Item.all
-  	render json: { items: @item.map { |i| ItemSerializer.new(i) }.as_json(root: false) }
+  	render json: { items: @items.map { |i| ItemSerializer.new(i) }.as_json(root: false) }
   end
 
   def show
