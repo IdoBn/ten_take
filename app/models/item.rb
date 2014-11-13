@@ -3,6 +3,10 @@ class Item < ActiveRecord::Base
 				format: {with: /free|taken/},
 				presence: true
 
+	validates :value,
+						presence: true,
+						numericality: { greater_than_or_equal_to: 0 }
+
 	belongs_to :user
 	has_many :borrows
 
