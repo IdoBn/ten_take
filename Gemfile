@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby "2.1.4"
 
 gem 'rails', '4.2.0.beta1'
 
@@ -27,6 +28,8 @@ group :development, :test do
 end
 
 gem 'pg'
+
+gem 'rails_12factor', group: :production
 
 
 

@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: ten_take_production
-  username: ten_take
-  password: <%= ENV['TEN_TAKE_DATABASE_PASSWORD'] %>
+  # database: ten_take_production
+  # username: ten_take
+  # password: <%= ENV['TEN_TAKE_DATABASE_PASSWORD'] %>
