@@ -10,10 +10,11 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "GET show" do
+    let(:user) {FactoryGirl.create(:user)}
     it "returns http success" do
-      get :show
+      get :show, id: user.id 
       expect(response).to have_http_status(:success)
     end
   end
-
+ #bronfer
 end
