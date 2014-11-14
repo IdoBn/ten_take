@@ -10,7 +10,7 @@ class BorrowsController < ApplicationController
     else
       @borrows = current_user.borrows
     end
-  	render json: {borrows: @borrows}
+  	render json: {borrows: @borrows.map { |b| BorrowSerializer.new(b).as_json(root: false) }}
   end
 
   def show
@@ -20,7 +20,7 @@ class BorrowsController < ApplicationController
    def destroy
     @borrow = current_user.borrows.where(item_id: params[:id],status: "want")
   	if @borrow.destroy_all
-  		render json: {borrow: @borrow}
+  		render json: {borrow: BorrowSerializer.new(@borrow).as_json}
   	else
   		render json: {errors: @borrow.errors.full_messages}
   	end

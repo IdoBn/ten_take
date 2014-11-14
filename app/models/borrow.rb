@@ -6,6 +6,7 @@ class Borrow < ActiveRecord::Base
 	has_many :hand_offs
 
 	validates :item_id, presence: true
+	validates_uniqueness_of :item_id, scope: [:borrower_id], if: :want?
 
 	def lender
 		self.item.user
@@ -13,6 +14,14 @@ class Borrow < ActiveRecord::Base
 
 	def hand_off!
 		self.hand_offs.create
+	end
+
+	def hand_off
+		HandOff.find_by(borrow_id: self.id)
+	end
+
+	def want?
+		self.status == 'want'
 	end
 
 	def update_status
