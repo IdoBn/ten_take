@@ -6,7 +6,7 @@ class BorrowsController < ApplicationController
     if !params[:borrower].blank?
       @borrows = current_user.borrows.where(status: "want")
     elsif !params[:lender].blank?
-      @borrows = Borrow.where(status: "want").where(item: { user_id: current_user.id})
+      @borrows = Borrow.where(status: 'want').joins(:item).merge(Item.where(user_id: current_user.id))
     else
       @borrows = current_user.borrows
     end
