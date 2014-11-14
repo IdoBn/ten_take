@@ -3,7 +3,13 @@ class BorrowsController < ApplicationController
   before_action :set_borrow, only: [:show]
 	
   def index
-  	@borrows = current_user.borrows
+    if !params[:borrower].blank?
+      @borrows = current_user.borrows.where(status: "want")
+    elsif !params[:lender].blank?
+      @borrows = Borrow.where(status: "want").where(item: { user_id: current_user.id})
+    else
+      @borrows = current_user.borrows
+    end
   	render json: {borrows: @borrows}
   end
 
@@ -11,13 +17,14 @@ class BorrowsController < ApplicationController
   	render json: {borrow: @borrow}
   end
 
-  # def update
-  # 	if borrow.update_attributes(borrow_params)
-  # 		render json: {borrow: borrow}
-  # 	else
-  # 		render json: {errors: borrow.errors.full_messages}
-  # 	end
-  # end
+   def destroy
+    @borrow = current_user.borrows.where(item_id: params[:id],status: "want")
+  	if @borrow.destroy_all
+  		render json: {borrow: @borrow}
+  	else
+  		render json: {errors: @borrow.errors.full_messages}
+  	end
+   end
 
   def create
   	@borrow = current_user.borrow!(params[:item_id])
