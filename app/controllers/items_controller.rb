@@ -3,9 +3,9 @@ class ItemsController < ApplicationController
 
   def index
     if(params[:state].blank?)
-      @items = Item.all
+      @items = Item.all.where.not(user_id: current_user.id,status: "taken")
     else
-      @items = Item.all.where(status: params[:state])
+      @items = Item.all.where(status: params[:state]).where.not(user_id: current_user.id,status: "taken")
     end
     render json: { items: @items.map { |i| ItemSerializer.new(i) }.as_json(root: false) }
   end

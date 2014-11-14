@@ -4,9 +4,10 @@ class BorrowsController < ApplicationController
 	
   def index
     if !params[:borrower].blank?
-      @borrows = current_user.borrows.where(status: "want")
+      @borrows = current_user.borrows
     elsif !params[:lender].blank?
-      @borrows = Borrow.where(status: 'want').joins(:item).merge(Item.where(user_id: current_user.id))
+      #@borrows = Borrow.where(status: 'want').joins(:item).merge(Item.where(user_id: current_user.id))
+      @borrows = Borrow.joins(:item).merge(Item.where(user_id: current_user.id))
     else
       @borrows = current_user.borrows
     end
