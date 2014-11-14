@@ -2,8 +2,12 @@ class ItemsController < ApplicationController
 	before_action :authenticate_user!
 
   def index
-  	@items = Item.all
-  	render json: { items: @items.map { |i| ItemSerializer.new(i) }.as_json(root: false) }
+    if(params[:state].blank?)
+      @items = Item.all
+    else
+      @items = Item.all.where(status: params[:state])
+    end
+    render json: { items: @items.map { |i| ItemSerializer.new(i) }.as_json(root: false) }
   end
 
   def show
